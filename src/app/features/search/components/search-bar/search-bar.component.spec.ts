@@ -39,6 +39,8 @@ describe('SearchBarComponent', () => {
   describe('should test formSubmit method', () => {
     it('should emit formGroupValue', () => {
       const expectedValue = { title: 'testTitle', type: 'testType' };
+      component['categories'] = [{ id: 'testId' } as any];
+      component.ngOnInit();
       jest
         .spyOn(component['formGroup'], 'getRawValue')
         .mockReturnValue(expectedValue);

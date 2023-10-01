@@ -1,11 +1,14 @@
 import { TestBed } from '@angular/core/testing';
 import { HeaderComponent } from './header.component';
+import { RouterModule } from '@angular/router';
 
 describe('HeaderComponent', () => {
   let component: HeaderComponent;
 
   beforeEach(() => {
-    TestBed.configureTestingModule({ imports: [HeaderComponent] });
+    TestBed.configureTestingModule({
+      imports: [HeaderComponent, RouterModule.forRoot([])],
+    });
     const fixture = TestBed.createComponent(HeaderComponent);
     component = fixture.componentInstance;
   });

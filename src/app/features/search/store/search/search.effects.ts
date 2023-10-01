@@ -12,6 +12,7 @@ import { Title } from '@angular/platform-browser';
 import { sortMoviesByYear } from './search.utilities';
 import { ResultsGroup } from '../../models/results-group.interface';
 import { Movie } from '../../models/movie.interface';
+import { AppPaths } from '@ma-shared';
 
 const NO_MOVIES_FOUND_CODE = 'Movie not found!';
 
@@ -77,11 +78,22 @@ export class SearchEffects {
     () =>
       this.actions$.pipe(
         ofType(SearchActions.researchFail),
-        tap(() => this.router.navigateByUrl('technical-error'))
+        tap(() => this.router.navigateByUrl(AppPaths.TechnicalError))
       ),
     { dispatch: false }
   );
 
+  /**
+   * Return an Observable that perform movies grouping by years.
+   * If browser supports WebWorkers technology this is used,
+   * otherwise the grouping function is performed in the current scope.
+   *
+   * @param searchResults movie list retrieved from the search api
+   * @param totalResults total results available on the DB for the current search
+   * @param error error object retrieved from the search api
+   * @param title page title to set with Title service
+   * @returns Observable parameters needed to trigger success action
+   */
   private handleResults(
     searchResults: Movie[],
     totalResults: number,

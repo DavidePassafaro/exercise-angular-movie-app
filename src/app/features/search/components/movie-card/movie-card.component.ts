@@ -7,6 +7,7 @@ import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { CommonModule } from '@angular/common';
 import { RouterModule } from '@angular/router';
 import { Movie } from '../../models/movie.interface';
+import { AppPaths } from '@ma-shared';
 
 @Component({
   selector: 'ma-movie-card',
@@ -20,6 +21,5 @@ export class MovieCardComponent {
   @Output() public detailClick: EventEmitter<void> = new EventEmitter();
 
   public readonly faArrowRight: IconDefinition = faArrowRight;
-
-  public switchDropdownMenu(): void {}
+  public readonly detailPath: string = AppPaths.Detail;
 }

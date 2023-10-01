@@ -68,15 +68,15 @@ export class SearchPageComponent {
 
   public searchCategories: SearchCategory[] = CATEGORIES;
 
-  public searchResults: Observable<ResultsGroup[]> = this.store
+  public searchResults$: Observable<ResultsGroup[]> = this.store
     .select(SearchStore.getSearchResults)
     .pipe(tap(() => window.scrollTo({ top: 0, behavior: 'smooth' })));
 
-  public currentPage: Observable<number> = this.store.select(
+  public currentPage$: Observable<number> = this.store.select(
     SearchStore.getSearchCurrentPage
   );
 
-  public totalPages: Observable<number> = this.store.select(
+  public totalPages$: Observable<number> = this.store.select(
     SearchStore.getSearchTotalPagesQuantity
   );
 

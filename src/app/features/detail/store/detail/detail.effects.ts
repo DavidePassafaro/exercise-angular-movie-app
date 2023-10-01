@@ -12,6 +12,7 @@ import {
 } from '../../services/detail/detail.service';
 import { MovieDetail } from '../../models/movie-detail.interface';
 import { Title } from '@angular/platform-browser';
+import { AppPaths } from '@ma-shared';
 
 @Injectable()
 export class DetailEffects {
@@ -28,15 +29,12 @@ export class DetailEffects {
       switchMap(({ id }) =>
         this.detailService.getMovieDetail(id).pipe(
           map((result: MovieDetailResult) => {
-            if (!result.error) {
-              this.title.setTitle('Movie App - ' + result.Title);
+            if (result.error) throw new Error(result.error);
 
-              return DetailActions.detailLoadSuccess({
-                detail: result as MovieDetail,
-              });
-            }
+            this.title.setTitle('Movie App - ' + result.Title);
 
-            return DetailActions.detailLoadFail({ error: result.error });
+            const detail: MovieDetail = result as MovieDetail;
+            return DetailActions.detailLoadSuccess({ detail });
           }),
           catchError((error) => of(DetailActions.detailLoadFail({ error })))
         )
@@ -49,7 +47,7 @@ export class DetailEffects {
     () =>
       this.actions$.pipe(
         ofType(DetailActions.detailLoadFail),
-        tap(() => this.router.navigateByUrl('technical-error'))
+        tap(() => this.router.navigateByUrl(AppPaths.TechnicalError))
       ),
     { dispatch: false }
   );

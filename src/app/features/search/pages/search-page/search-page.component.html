@@ -4,7 +4,7 @@
     (search)="search($event)"
   ></ma-search-bar>
 
-  <ng-container *ngIf="searchResults | async as results; else searchCta">
+  <ng-container *ngIf="searchResults$ | async as results; else searchCta">
     <ng-container
       *ngIf="results.length; then resultsList; else noResults"
     ></ng-container>
@@ -23,10 +23,10 @@
       </div>
 
       <ma-navigation
-        *ngIf="currentPage | async as pageNumber"
+        *ngIf="currentPage$ | async as pageNumber"
         class="block mt-4"
         [currentPage]="pageNumber"
-        [totalPages]="totalPages | async"
+        [totalPages]="totalPages$ | async"
         (forwardClick)="changePage(pageNumber - 1)"
         (backClick)="changePage(pageNumber + 1)"
       ></ma-navigation>

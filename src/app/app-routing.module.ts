@@ -5,30 +5,31 @@ import {
   Error404Component,
   TechnicalErrorComponent,
 } from '@ma-core';
+import { AppPaths } from '@ma-shared';
 
 const routes: Routes = [
   {
-    path: 'search',
+    path: AppPaths.Search,
     loadChildren: () =>
       import('./features/search/search.module').then((m) => m.SearchModule),
     title: 'Search a movie',
   },
   {
-    path: 'detail',
+    path: AppPaths.Detail,
     loadChildren: () =>
       import('./features/detail/detail.module').then((m) => m.DetailModule),
     title: 'Movie detail',
   },
 
-  { path: 'error-404', component: Error404Component, title: '404' },
+  { path: AppPaths.Error404, component: Error404Component, title: '404' },
   {
-    path: 'technical-error',
+    path: AppPaths.TechnicalError,
     component: TechnicalErrorComponent,
     title: 'Error',
   },
 
-  { path: '', redirectTo: '/search', pathMatch: 'full' },
-  { path: '**', redirectTo: '/error-404', pathMatch: 'full' },
+  { path: '', redirectTo: `/${AppPaths.Search}`, pathMatch: 'full' },
+  { path: '**', redirectTo: `/${AppPaths.Error404}`, pathMatch: 'full' },
 ];
 
 @NgModule({

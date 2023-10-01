@@ -17,7 +17,7 @@ export class AppComponent {
     { label: 'Search a movie', link: 'search' },
   ];
 
-  public isSpinnerOn: Observable<boolean> = this.store
+  public isSpinnerOn$: Observable<boolean> = this.store
     .select(SpinnerStore.getSpinnerLoading)
     .pipe(
       switchMap((value: boolean) =>

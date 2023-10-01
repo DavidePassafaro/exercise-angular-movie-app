@@ -14,7 +14,7 @@ import { CommonModule } from '@angular/common';
 export class DetailPageComponent {
   private readonly store: Store = inject(Store);
 
-  public movieDetail: Observable<MovieDetail> = this.store.select(
+  public movieDetail$: Observable<MovieDetail> = this.store.select(
     DetailStore.getDetailMovieDetail
   );
 }
