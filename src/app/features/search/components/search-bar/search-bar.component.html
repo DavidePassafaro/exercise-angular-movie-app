@@ -1,0 +1,76 @@
+<form [formGroup]="formGroup" (ngSubmit)="formSubmit()">
+  <div class="flex relative">
+    <label for="movie-search" class="sr-only"> Search a movie </label>
+
+    <button
+      id="dropdown-button"
+      data-dropdown-toggle="dropdown-search-movie"
+      class="flex-shrink-0 z-10 inline-flex items-center py-2.5 px-2 lg:px-4 w-auto lg:w-32 text-sm font-medium text-center border rounded-l-lg bg-gray-700 hover:bg-gray-600 focus:outline-none focus:bg-gray-600 text-white border-gray-600"
+      type="button"
+      (click)="switchDropdownMenu()"
+    >
+      <fa-icon
+        class="mr-2"
+        [icon]="categories[selectedCategory].icon"
+        size="lg"
+      ></fa-icon>
+      {{ categories[selectedCategory].label }}
+
+      <div class="flex-1 flex justify-end ml-2">
+        <fa-icon
+          [ngClass]="{ 'rotate-180': isDropdownOpen }"
+          [icon]="faChevronDown"
+          size="sm"
+        ></fa-icon>
+      </div>
+    </button>
+
+    <div
+      id="dropdown-search-movie"
+      class="absolute top-full mt-1 z-10 divide-y divide-gray-100 rounded-lg shadow w-28 lg:w-32 bg-gray-700"
+      [ngClass]="{ hidden: !isDropdownOpen }"
+    >
+      <ul class="py-2 text-sm text-gray-200" aria-labelledby="dropdown-button">
+        <li *ngFor="let category of categories; let index = index">
+          <label
+            role="menuitem"
+            tabindex="0"
+            class="inline-flex w-full px-2 lg:px-4 py-2 text-sm text-gray-400 hover:bg-gray-600 hover:text-white focus:outline-none focus:bg-gray-600"
+            (click)="selectCategory(index)"
+            (keydown.enter)="selectCategory(index)"
+          >
+            <input
+              class="hidden"
+              type="radio"
+              formControlName="type"
+              [value]="category.id"
+            />
+
+            <div class="inline-flex items-center">
+              <fa-icon class="mr-2" [icon]="category.icon" size="lg"></fa-icon>
+              {{ category.label }}
+            </div>
+          </label>
+        </li>
+      </ul>
+    </div>
+
+    <div class="relative w-full">
+      <input
+        id="movie-search"
+        class="block p-2.5 w-full z-20 text-sm rounded-r-lg border-l-2 border bg-gray-700 border-l-gray-700 border-gray-600 placeholder-gray-400 text-white focus:outline-none focus:bg-gray-600"
+        [placeholder]="categories[selectedCategory].placeholder"
+        formControlName="title"
+      />
+
+      <button
+        type="submit"
+        [disabled]="formGroup.invalid"
+        class="absolute top-0 right-0 h-full p-2.5 text-sm font-medium text-white rounded-r-lg border border-blue-700 focus:outline-none bg-blue-600 hover:bg-blue-700 focus:bg-blue-700 disabled:bg-blue-400 disabled:border-blue-400"
+      >
+        <fa-icon class="lg:mx-2" [icon]="faMagnifyingGlass" size="lg"></fa-icon>
+        <span class="sr-only">Search</span>
+      </button>
+    </div>
+  </div>
+</form>

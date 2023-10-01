@@ -1,0 +1,18 @@
+<div class="ma-container px-4 pb-4 h-full flex flex-col mt-5">
+  <ma-search-bar
+    [categories]="searchCategories"
+    (search)="search($event)"
+  ></ma-search-bar>
+
+  <!-- <div class="grid grid-cols-1 gap-3">List</div> -->
+
+  <div class="flex-1 flex justify-center items-center">
+    <h1
+      class="text-2xl font-extrabold leading-none tracking-tight text-gray-900 md:text-5xl lg:text-6xl"
+    >
+      <fa-icon class="mr-4" [icon]="faArrowUp" size="lg"></fa-icon>
+      Search a movie
+      <fa-icon class="ml-4" [icon]="faArrowUp" size="lg"></fa-icon>
+    </h1>
+  </div>
+</div>
