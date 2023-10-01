@@ -18,6 +18,7 @@ import { SearchStore } from '../../store/search';
 import { Movie } from '@ma-shared';
 import { Observable } from 'rxjs';
 import { CommonModule } from '@angular/common';
+import { MovieCardComponent } from '../../components/movie-card/movie-card.component';
 
 const CATEGORIES: SearchCategory[] = [
   {
@@ -50,7 +51,12 @@ const CATEGORIES: SearchCategory[] = [
   selector: 'ma-search-page',
   templateUrl: './search-page.component.html',
   standalone: true,
-  imports: [CommonModule, SearchBarComponent, FontAwesomeModule],
+  imports: [
+    CommonModule,
+    SearchBarComponent,
+    MovieCardComponent,
+    FontAwesomeModule,
+  ],
 })
 export class SearchPageComponent {
   private readonly store: Store = inject(Store);

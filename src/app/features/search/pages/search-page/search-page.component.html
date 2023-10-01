@@ -10,8 +10,10 @@
     ></ng-container>
 
     <ng-template #resultsList>
-      <ul class="mt-5 grid grid-cols-1 lg:grid-cols-3 gap-3">
-        <li *ngFor="let result of movies">{{ result.Title }}</li>
+      <ul class="mt-5 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-3">
+        <li *ngFor="let movie of movies">
+          <ma-movie-card [movie]="movie"></ma-movie-card>
+        </li>
       </ul>
     </ng-template>
 

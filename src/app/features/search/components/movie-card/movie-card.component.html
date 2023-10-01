@@ -1,0 +1,29 @@
+<div
+  class="h-full flex flex-col border rounded-lg shadow bg-gray-800 border-gray-700"
+>
+  <img
+    class="rounded-t-lg w-full h-52 lg:h-96 object-cover"
+    [src]="movie.Poster !== 'N/A' ? movie.Poster : 'assets/no-image.png'"
+    alt=""
+  />
+
+  <div class="p-5 flex-1 flex flex-col">
+    <h5 class="flex-1 1mb-2 text-2xl font-bold tracking-tight text-white">
+      {{ movie.Title }}
+    </h5>
+
+    <div class="flex justify-between items-center mt-3">
+      <p class="font-normal text-xl text-gray-400">
+        {{ movie.Year }}
+      </p>
+
+      <a
+        [routerLink]="['../detail', movie.imdbID]"
+        class="inline-flex items-center px-3 py-2 text-sm font-medium text-center text-white rounded-lg focus:outline-none bg-blue-600 hover:bg-blue-700 focus:bg-blue-700"
+      >
+        Read more
+        <fa-icon class="ml-2" [icon]="faArrowRight" size="lg"></fa-icon>
+      </a>
+    </div>
+  </div>
+</div>
