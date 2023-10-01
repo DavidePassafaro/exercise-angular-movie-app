@@ -21,7 +21,7 @@ export class AppComponent {
     .select(SpinnerStore.getSpinnerLoading)
     .pipe(
       switchMap((value: boolean) =>
-        value ? of(value).pipe(delay(1000)) : of(value)
+        value ? of(value).pipe(delay(500)) : of(value)
       )
     );
 }

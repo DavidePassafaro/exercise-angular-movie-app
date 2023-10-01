@@ -30,7 +30,7 @@ export class SearchEffects {
               ? SearchActions.researchSuccess({
                   results: Search || [],
                   totalResults: +totalResults || 0,
-                  currentPage: 0,
+                  currentPage: 1,
                 })
               : SearchActions.researchFail({ error });
           }),

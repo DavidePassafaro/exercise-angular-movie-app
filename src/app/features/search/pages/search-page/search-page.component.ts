@@ -15,10 +15,11 @@ import {
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { Store } from '@ngrx/store';
 import { SearchStore } from '../../store/search';
-import { Observable } from 'rxjs';
+import { Observable, tap } from 'rxjs';
 import { CommonModule } from '@angular/common';
 import { MovieCardComponent } from '../../components/movie-card/movie-card.component';
 import { Movie } from '../../models/movie.interface';
+import { NavigationComponent } from '../../components/navigation/navigation.component';
 
 const CATEGORIES: SearchCategory[] = [
   {
@@ -55,6 +56,7 @@ const CATEGORIES: SearchCategory[] = [
     CommonModule,
     SearchBarComponent,
     MovieCardComponent,
+    NavigationComponent,
     FontAwesomeModule,
   ],
 })
@@ -65,8 +67,16 @@ export class SearchPageComponent {
 
   public searchCategories: SearchCategory[] = CATEGORIES;
 
-  public searchResults: Observable<Movie[]> = this.store.select(
-    SearchStore.getSearchResults
+  public searchResults: Observable<Movie[]> = this.store
+    .select(SearchStore.getSearchResults)
+    .pipe(tap(() => window.scrollTo({ top: 0, behavior: 'smooth' })));
+
+  public currentPage: Observable<number> = this.store.select(
+    SearchStore.getSearchCurrentPage
+  );
+
+  public totalPages: Observable<number> = this.store.select(
+    SearchStore.getSearchTotalPagesQuantity
   );
 
   public search({ title, type }: SearchParameters): void {

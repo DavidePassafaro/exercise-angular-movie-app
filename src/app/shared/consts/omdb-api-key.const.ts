@@ -1,1 +1,1 @@
-export const OMDB_API_KEY: string = 'd3e85d31';
+export const OMDB_API_KEY: string = '8ea39b15';

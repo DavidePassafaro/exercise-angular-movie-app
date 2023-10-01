@@ -25,6 +25,12 @@ export const getSearchCurrentPage = createSelector(
   ({ currentPage }: SearchState) => currentPage
 );
 
+export const getSearchTotalPagesQuantity = createSelector(
+  getSearchState,
+  ({ totalResults }: SearchState) =>
+    Math.floor(totalResults / 10) + (totalResults % 10 === 0 ? 0 : 1)
+);
+
 export const getSearchError = createSelector(
   getSearchState,
   ({ error }: SearchState) => error

@@ -15,6 +15,15 @@
           <ma-movie-card [movie]="movie"></ma-movie-card>
         </li>
       </ul>
+
+      <ma-navigation
+        *ngIf="currentPage | async as pageNumber"
+        class="block mt-4"
+        [currentPage]="pageNumber"
+        [totalPages]="totalPages | async"
+        (forwardClick)="changePage(pageNumber - 1)"
+        (backClick)="changePage(pageNumber + 1)"
+      ></ma-navigation>
     </ng-template>
 
     <ng-template #noResults>

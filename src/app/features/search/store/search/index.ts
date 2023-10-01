@@ -3,6 +3,7 @@ import {
   getSearchLoading,
   getSearchResults,
   getSearchCurrentPage,
+  getSearchTotalPagesQuantity,
   getSearchError,
 } from './search.selectors';
 
@@ -12,5 +13,6 @@ export const SearchStore = {
   getSearchLoading,
   getSearchResults,
   getSearchCurrentPage,
+  getSearchTotalPagesQuantity,
   getSearchError,
 };

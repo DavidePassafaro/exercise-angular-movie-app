@@ -1,0 +1,27 @@
+<div class="flex flex-col items-center">
+  <!-- Help text -->
+  <span class="text-sm text-gray-700">
+    Showing page
+    <span class="font-bold text-gray-900">{{ currentPage }}</span> of
+    <span class="font-bold text-gray-900">{{ totalPages }}</span>
+  </span>
+
+  <!-- Buttons -->
+  <div class="inline-flex mt-2 xs:mt-0">
+    <button
+      [disabled]="currentPage === 1"
+      class="flex items-center justify-center px-4 h-10 text-base font-medium rounded-l bg-gray-800 border-gray-700 text-gray-400 hover:bg-gray-700 hover:text-white disabled:cursor-not-allowed disabled:text-gray-400 disabled:bg-gray-800"
+      (click)="forwardClickHandler()"
+    >
+      Prev
+    </button>
+
+    <button
+      [disabled]="currentPage === totalPages"
+      class="flex items-center justify-center px-4 h-10 text-base font-medium border-0 border-l rounded-r bg-gray-800 border-gray-700 text-gray-400 hover:bg-gray-700 hover:text-white disabled:cursor-not-allowed disabled:text-gray-400 disabled:bg-gray-800"
+      (click)="backClickHandler()"
+    >
+      Next
+    </button>
+  </div>
+</div>

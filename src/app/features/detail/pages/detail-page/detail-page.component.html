@@ -7,8 +7,9 @@
       <div class="lg:w-4/5 mx-auto flex flex-wrap">
         <img
           alt=""
-          class="lg:w-1/2 w-full h-max object-cover object-center rounded border border-gray-200"
-          [src]="movie.Poster"
+          class="lg:w-1/2 w-full h-max object-cover rounded border border-gray-200"
+          [ngClass]="movie.Poster !== 'N/A' ? 'object-center' : 'object-bottom'"
+          [src]="movie.Poster !== 'N/A' ? movie.Poster : 'assets/no-image.png'"
         />
 
         <div class="lg:w-1/2 w-full lg:pl-10 lg:pb-6 mt-6 lg:mt-0">

@@ -3,6 +3,7 @@
 >
   <img
     class="rounded-t-lg w-full h-52 lg:h-96 object-cover"
+    [ngClass]="movie.Poster !== 'N/A' ? 'object-center' : 'object-bottom'"
     [src]="movie.Poster !== 'N/A' ? movie.Poster : 'assets/no-image.png'"
     alt=""
   />
