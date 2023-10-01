@@ -10,4 +10,6 @@ export class AppComponent {
   public pages: NavigationPage[] = [
     { label: 'Search a movie', link: 'search' },
   ];
+
+  public isSpinnerOn: boolean;
 }
