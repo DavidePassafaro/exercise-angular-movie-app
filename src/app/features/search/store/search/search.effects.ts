@@ -22,11 +22,11 @@ export class SearchEffects {
       tap(() => this.store.dispatch(SpinnerStore.start())),
       switchMap(({ title, movieType }) =>
         this.searchService.searchMovie(title, movieType).pipe(
-          map(({ Search, totalResults, Response, error }) => {
+          map(({ Search, totalResults, error }) => {
             const isNoMovieFoundError: boolean =
-              !Response && error === 'Movie not found!';
+              !error || error === 'Movie not found!';
 
-            return Response || isNoMovieFoundError
+            return isNoMovieFoundError
               ? SearchActions.researchSuccess({
                   results: Search || [],
                   totalResults: +totalResults || 0,
@@ -51,8 +51,8 @@ export class SearchEffects {
           switchMap(({ searchTitle, searchType }) =>
             this.searchService.searchMovie(searchTitle, searchType, pageIndex)
           ),
-          map(({ Search, totalResults, Response, error }) =>
-            Response
+          map(({ Search, totalResults, error }) =>
+            !error
               ? SearchActions.researchSuccess({
                   results: Search,
                   totalResults: +totalResults,

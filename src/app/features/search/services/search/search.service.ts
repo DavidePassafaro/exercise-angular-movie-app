@@ -1,15 +1,12 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable, inject } from '@angular/core';
-import { Movie } from '@ma-shared';
-import { Observable, tap } from 'rxjs';
+import { BaseOmDbResponse, OMDB_API_KEY } from '@ma-shared';
+import { Observable } from 'rxjs';
+import { Movie } from '../../models/movie.interface';
 
-const API_KEY: string = '8ea39b15';
-
-export interface SearchResult {
-  Response: boolean;
+export interface SearchResult extends BaseOmDbResponse {
   Search?: Movie[];
   totalResults?: string; // string representation of a number
-  error?: string;
 }
 
 @Injectable()
@@ -21,9 +18,9 @@ export class SearchService {
     type?: string,
     pageIndex?: number
   ): Observable<SearchResult> {
-    let url: string = `http://www.omdbapi.com/?apikey=${API_KEY}&s=${title}`;
+    let url: string = `http://www.omdbapi.com/?apikey=${OMDB_API_KEY}&s=${title}`;
     if (type) url += `&type=${type}`;
     if (pageIndex) url += `&page=${pageIndex}`;
-    return this.http.get<SearchResult>(url).pipe(tap(console.log));
+    return this.http.get<SearchResult>(url);
   }
 }

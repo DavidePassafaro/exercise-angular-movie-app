@@ -1,5 +1,5 @@
-import { Movie } from '@ma-shared';
 import { createActionGroup, emptyProps, props } from '@ngrx/store';
+import { Movie } from '../../models/movie.interface';
 
 export const SearchActions = createActionGroup({
   source: 'Search',

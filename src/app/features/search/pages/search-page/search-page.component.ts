@@ -15,10 +15,10 @@ import {
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { Store } from '@ngrx/store';
 import { SearchStore } from '../../store/search';
-import { Movie } from '@ma-shared';
 import { Observable } from 'rxjs';
 import { CommonModule } from '@angular/common';
 import { MovieCardComponent } from '../../components/movie-card/movie-card.component';
+import { Movie } from '../../models/movie.interface';
 
 const CATEGORIES: SearchCategory[] = [
   {

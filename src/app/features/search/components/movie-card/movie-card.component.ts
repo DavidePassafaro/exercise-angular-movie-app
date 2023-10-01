@@ -5,8 +5,8 @@ import {
 } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { NgClass } from '@angular/common';
-import { Movie } from '@ma-shared';
 import { RouterModule } from '@angular/router';
+import { Movie } from '../../models/movie.interface';
 
 @Component({
   selector: 'ma-movie-card',

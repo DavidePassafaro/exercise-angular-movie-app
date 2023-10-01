@@ -1,6 +1,6 @@
 import { Action, ActionReducer, createReducer, on } from '@ngrx/store';
 import { SearchActions } from './search.actions';
-import { Movie } from '@ma-shared';
+import { Movie } from '../../models/movie.interface';
 
 export interface SearchState {
   loading: boolean;
