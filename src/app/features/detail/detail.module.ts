@@ -1,15 +1,37 @@
-import { NgModule } from '@angular/core';
-import { RouterModule, Routes } from '@angular/router';
+import { NgModule, inject } from '@angular/core';
+import {
+  ActivatedRouteSnapshot,
+  ResolveFn,
+  RouterModule,
+  RouterStateSnapshot,
+  Routes,
+} from '@angular/router';
 import { DetailPageComponent } from './pages/detail-page/detail-page.component';
 import { DetailService } from './services/detail/detail.service';
 import { HttpClientModule } from '@angular/common/http';
-import { StoreModule } from '@ngrx/store';
+import { Store, StoreModule } from '@ngrx/store';
 import { EffectsModule } from '@ngrx/effects';
 import { DETAIL_KEY } from './store/detail/detail.selectors';
-import { DetailReducer } from './store/detail';
+import { DetailReducer, DetailStore } from './store/detail';
 import { DetailEffects } from './store/detail/detail.effects';
+import { filter } from 'rxjs';
 
-const routes: Routes = [{ path: ':movieId', component: DetailPageComponent }];
+export const movieResolver: ResolveFn<any> = (
+  route: ActivatedRouteSnapshot
+) => {
+  const store: Store = inject(Store);
+  store.dispatch(DetailStore.detailOpen({ id: route.params['movieId'] }));
+  return store.select(DetailStore.getDetailMovieDetail).pipe(filter(Boolean));
+};
+
+const routes: Routes = [
+  {
+    path: ':movieId',
+    component: DetailPageComponent,
+    resolve: { movie: movieResolver },
+    canDeactivate: [() => inject(Store).dispatch(DetailStore.reset())],
+  },
+];
 
 @NgModule({
   imports: [

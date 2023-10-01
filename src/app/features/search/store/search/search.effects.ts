@@ -8,6 +8,9 @@ import { SpinnerStore } from '@ma-core';
 import { SearchActions } from './search.actions';
 import { getCurrentSearchInfo } from './search.selectors';
 import { Router } from '@angular/router';
+import { Title } from '@angular/platform-browser';
+
+const NO_MOVIES_FOUND_CODE = 'Movie not found!';
 
 @Injectable()
 export class SearchEffects {
@@ -15,6 +18,7 @@ export class SearchEffects {
   private readonly store = inject(Store);
   private readonly searchService = inject(SearchService);
   private readonly router = inject(Router);
+  private readonly title = inject(Title);
 
   public startResearch$: Observable<Action> = createEffect(() =>
     this.actions$.pipe(
@@ -23,16 +27,20 @@ export class SearchEffects {
       switchMap(({ title, movieType }) =>
         this.searchService.searchMovie(title, movieType).pipe(
           map(({ Search, totalResults, error }) => {
-            const isNoMovieFoundError: boolean =
-              !error || error === 'Movie not found!';
+            const isNoMoviesFoundError: boolean =
+              !error || error === NO_MOVIES_FOUND_CODE;
 
-            return isNoMovieFoundError
-              ? SearchActions.researchSuccess({
-                  results: Search || [],
-                  totalResults: +totalResults || 0,
-                  currentPage: 1,
-                })
-              : SearchActions.researchFail({ error });
+            if (isNoMoviesFoundError) {
+              this.title.setTitle('Movie App - Search results for ' + title);
+
+              return SearchActions.researchSuccess({
+                results: Search || [],
+                totalResults: +totalResults || 0,
+                currentPage: 1,
+              });
+            }
+
+            return SearchActions.researchFail({ error });
           }),
           catchError((error) => of(SearchActions.researchFail({ error })))
         )

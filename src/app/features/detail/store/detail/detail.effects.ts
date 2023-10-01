@@ -11,6 +11,7 @@ import {
   MovieDetailResult,
 } from '../../services/detail/detail.service';
 import { MovieDetail } from '../../models/movie-detail.interface';
+import { Title } from '@angular/platform-browser';
 
 @Injectable()
 export class DetailEffects {
@@ -18,6 +19,7 @@ export class DetailEffects {
   private readonly store = inject(Store);
   private readonly detailService = inject(DetailService);
   private readonly router = inject(Router);
+  private readonly title = inject(Title);
 
   public getDetail$: Observable<Action> = createEffect(() =>
     this.actions$.pipe(
@@ -26,11 +28,15 @@ export class DetailEffects {
       switchMap(({ id }) =>
         this.detailService.getMovieDetail(id).pipe(
           map((result: MovieDetailResult) => {
-            return !result.error
-              ? DetailActions.detailLoadSuccess({
-                  detail: result as MovieDetail,
-                })
-              : DetailActions.detailLoadFail({ error: result.error });
+            if (!result.error) {
+              this.title.setTitle('Movie App - ' + result.Title);
+
+              return DetailActions.detailLoadSuccess({
+                detail: result as MovieDetail,
+              });
+            }
+
+            return DetailActions.detailLoadFail({ error: result.error });
           }),
           catchError((error) => of(DetailActions.detailLoadFail({ error })))
         )
