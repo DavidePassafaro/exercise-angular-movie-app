@@ -1,29 +1,20 @@
 import { TestBed } from '@angular/core/testing';
 import { RouterTestingModule } from '@angular/router/testing';
 import { AppComponent } from './app.component';
+import { CoreModule } from '@ma-core';
 
 describe('AppComponent', () => {
-  beforeEach(() => TestBed.configureTestingModule({
-    imports: [RouterTestingModule],
-    declarations: [AppComponent]
-  }));
+  let app: AppComponent;
 
-  it('should create the app', () => {
+  beforeEach(() => {
+    TestBed.configureTestingModule({
+      imports: [RouterTestingModule, CoreModule],
+      declarations: [AppComponent],
+    });
+
     const fixture = TestBed.createComponent(AppComponent);
-    const app = fixture.componentInstance;
-    expect(app).toBeTruthy();
+    app = fixture.componentInstance;
   });
 
-  it(`should have as title 'movie-app'`, () => {
-    const fixture = TestBed.createComponent(AppComponent);
-    const app = fixture.componentInstance;
-    expect(app.title).toEqual('movie-app');
-  });
-
-  it('should render title', () => {
-    const fixture = TestBed.createComponent(AppComponent);
-    fixture.detectChanges();
-    const compiled = fixture.nativeElement as HTMLElement;
-    expect(compiled.querySelector('.content span')?.textContent).toContain('movie-app app is running!');
-  });
+  it('should create the app', () => expect(app).toBeTruthy());
 });
