@@ -4,15 +4,32 @@
     (search)="search($event)"
   ></ma-search-bar>
 
-  <!-- <div class="grid grid-cols-1 gap-3">List</div> -->
+  <ng-container *ngIf="searchResults | async as movies; else searchCta">
+    <ng-container
+      *ngIf="movies.length; then resultsList; else noResults"
+    ></ng-container>
 
-  <div class="flex-1 flex justify-center items-center">
-    <h1
-      class="text-2xl font-extrabold leading-none tracking-tight text-gray-900 md:text-5xl lg:text-6xl"
-    >
-      <fa-icon class="mr-4" [icon]="faArrowUp" size="lg"></fa-icon>
-      Search a movie
-      <fa-icon class="ml-4" [icon]="faArrowUp" size="lg"></fa-icon>
-    </h1>
-  </div>
+    <ng-template #resultsList>
+      <ul class="mt-5 grid grid-cols-1 lg:grid-cols-3 gap-3">
+        <li *ngFor="let result of movies">{{ result.Title }}</li>
+      </ul>
+    </ng-template>
+
+    <ng-template #noResults>
+      <div class="flex-1 flex justify-center items-center">
+        <h1 class="text-2xl text-gray-900 md:text-5xl lg:text-6xl">
+          No results found!!!
+        </h1>
+      </div>
+    </ng-template>
+  </ng-container>
+
+  <ng-template #searchCta>
+    <div class="flex-1 flex justify-center items-center">
+      <h1 class="text-2xl text-gray-900 md:text-5xl lg:text-6xl">
+        <fa-icon class="mr-4" [icon]="faArrowUp" size="lg"></fa-icon>
+        Search a movie
+        <fa-icon class="ml-4" [icon]="faArrowUp" size="lg"></fa-icon>
+      </h1></div
+  ></ng-template>
 </div>

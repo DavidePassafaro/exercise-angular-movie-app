@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, inject } from '@angular/core';
 import {
   SearchBarComponent,
   SearchCategory,
@@ -13,6 +13,11 @@ import {
   faArrowUp,
 } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
+import { Store } from '@ngrx/store';
+import { SearchStore } from '../../store/search';
+import { Movie } from '@ma-shared';
+import { Observable } from 'rxjs';
+import { CommonModule } from '@angular/common';
 
 const CATEGORIES: SearchCategory[] = [
   {
@@ -29,7 +34,7 @@ const CATEGORIES: SearchCategory[] = [
   },
   {
     label: 'Series',
-    placeholder: 'Serie title',
+    placeholder: 'Series title',
     icon: faHouseLaptop,
     id: 'series',
   },
@@ -45,14 +50,24 @@ const CATEGORIES: SearchCategory[] = [
   selector: 'ma-search-page',
   templateUrl: './search-page.component.html',
   standalone: true,
-  imports: [SearchBarComponent, FontAwesomeModule],
+  imports: [CommonModule, SearchBarComponent, FontAwesomeModule],
 })
 export class SearchPageComponent {
+  private readonly store: Store = inject(Store);
+
   public readonly faArrowUp: IconDefinition = faArrowUp;
 
   public searchCategories: SearchCategory[] = CATEGORIES;
 
-  public search(parameters: SearchParameters): void {
-    console.log(parameters);
+  public searchResults: Observable<Movie[]> = this.store.select(
+    SearchStore.getSearchResults
+  );
+
+  public search({ title, type }: SearchParameters): void {
+    this.store.dispatch(SearchStore.startResearch({ title, movieType: type }));
+  }
+
+  public changePage(pageIndex: number): void {
+    this.store.dispatch(SearchStore.changePage({ pageIndex }));
   }
 }
