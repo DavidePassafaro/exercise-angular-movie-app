@@ -1,10 +1,15 @@
 import { NgModule } from '@angular/core';
-import { RouterModule, Routes } from '@angular/router';
+import { RouterModule, Routes, TitleStrategy } from '@angular/router';
+import { AppTitleStrategy, Error404Component } from '@ma-core';
 
-const routes: Routes = [];
+const routes: Routes = [
+  { path: 'error-404', component: Error404Component, title: '404' },
+  { path: '**', redirectTo: '/error-404', pathMatch: 'full' },
+];
 
 @NgModule({
   imports: [RouterModule.forRoot(routes)],
-  exports: [RouterModule]
+  providers: [{ provide: TitleStrategy, useClass: AppTitleStrategy }],
+  exports: [RouterModule],
 })
-export class AppRoutingModule { }
+export class AppRoutingModule {}

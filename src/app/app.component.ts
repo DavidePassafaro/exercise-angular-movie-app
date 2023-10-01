@@ -7,5 +7,5 @@ import { NavigationPage } from '@ma-shared';
   styleUrls: ['./app.component.scss'],
 })
 export class AppComponent {
-  public pages: NavigationPage[] = [];
+  public pages: NavigationPage[] = [{ label: 'Homepage', link: 'homepage' }];
 }
