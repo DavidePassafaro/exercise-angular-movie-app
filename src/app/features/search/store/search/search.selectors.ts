@@ -5,14 +5,14 @@ export const SEARCH_KEY = 'search';
 
 const getSearchState = createFeatureSelector<SearchState>(SEARCH_KEY);
 
-export const getCurrentSearchInfo = createSelector(
-  getSearchState,
-  ({ searchTitle, searchType }: SearchState) => ({ searchTitle, searchType })
-);
-
 export const getSearchLoading = createSelector(
   getSearchState,
   ({ loading }: SearchState) => loading
+);
+
+export const getCurrentSearchInfo = createSelector(
+  getSearchState,
+  ({ searchTitle, searchType }: SearchState) => ({ searchTitle, searchType })
 );
 
 export const getSearchResults = createSelector(

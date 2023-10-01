@@ -4,7 +4,7 @@ import {
   faArrowRight,
 } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
-import { NgClass } from '@angular/common';
+import { CommonModule } from '@angular/common';
 import { RouterModule } from '@angular/router';
 import { Movie } from '../../models/movie.interface';
 
@@ -12,7 +12,7 @@ import { Movie } from '../../models/movie.interface';
   selector: 'ma-movie-card',
   templateUrl: './movie-card.component.html',
   standalone: true,
-  imports: [NgClass, FontAwesomeModule, RouterModule],
+  imports: [CommonModule, FontAwesomeModule, RouterModule],
 })
 export class MovieCardComponent {
   @Input() public movie: Movie;

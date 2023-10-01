@@ -1,0 +1,53 @@
+<div
+  class="ma-container px-4 pb-4 h-full flex flex-col mt-5"
+  *ngIf="movieDetail | async as movie"
+>
+  <section class="text-gray-700 body-font overflow-hidden bg-white">
+    <div class="container px-5 py-24 mx-auto">
+      <div class="lg:w-4/5 mx-auto flex flex-wrap">
+        <img
+          alt=""
+          class="lg:w-1/2 w-full h-max object-cover object-center rounded border border-gray-200"
+          [src]="movie.Poster"
+        />
+
+        <div class="lg:w-1/2 w-full lg:pl-10 lg:pb-6 mt-6 lg:mt-0">
+          <h2 class="text-sm title-font text-gray-500 tracking-widest">
+            {{ movie.Type | titlecase }}
+          </h2>
+
+          <h1 class="text-gray-900 text-3xl title-font font-medium mb-1">
+            {{ movie.Title }}
+          </h1>
+
+          <p class="leading-relaxed">
+            {{ movie.Plot }}
+          </p>
+
+          <div class="mt-4 border-b-2 border-gray-200 mb-5"></div>
+
+          <div class="flex">
+            <ul>
+              <li>
+                <span class="title-font font-medium text-xl"> Years: </span>
+                <span class="text-lg"> {{ movie.Year }} </span>
+              </li>
+              <li>
+                <span class="title-font font-medium text-xl"> Genre: </span>
+                <span class="text-lg"> {{ movie.Genre }} </span>
+              </li>
+              <li>
+                <span class="title-font font-medium text-xl"> Language: </span>
+                <span class="text-lg"> {{ movie.Language }} </span>
+              </li>
+              <li>
+                <span class="title-font font-medium text-xl"> Writers: </span>
+                <span class="text-lg"> {{ movie.Writer }} </span>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+</div>

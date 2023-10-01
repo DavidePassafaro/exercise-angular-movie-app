@@ -49,7 +49,7 @@ export const SearchReducer: ActionReducer<SearchState, Action> = createReducer(
     loading: false,
     searchTitle: null,
     searchType: null,
-    error: error,
+    error,
   })),
   on(SearchActions.reset, () => ({ ...initialState }))
 );

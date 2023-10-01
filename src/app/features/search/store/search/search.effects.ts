@@ -71,9 +71,7 @@ export class SearchEffects {
     () =>
       this.actions$.pipe(
         ofType(SearchActions.researchFail),
-        tap(() => {
-          this.router.navigateByUrl('technical-error');
-        })
+        tap(() => this.router.navigateByUrl('technical-error'))
       ),
     { dispatch: false }
   );
