@@ -1,0 +1,19 @@
+<footer class="bg-gray-800">
+  <div
+    class="w-full ma-container p-4 md:flex md:items-center md:justify-between"
+  >
+    <span class="text-sm sm:text-center text-gray-400">
+      Made by Davide Passafaro
+    </span>
+
+    <ul
+      class="flex flex-wrap items-center mt-3 text-sm font-medium text-gray-400 sm:mt-0"
+    >
+      <li *ngFor="let page of pages">
+        <a [routerLink]="page.link" class="mr-4 hover:underline md:mr-6">
+          {{ page.label }}
+        </a>
+      </li>
+    </ul>
+  </div>
+</footer>

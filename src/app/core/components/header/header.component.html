@@ -1,0 +1,54 @@
+<header>
+  <nav class="border-gray-200 px-4 lg:px-6 py-2.5 bg-gray-800">
+    <div class="flex flex-wrap justify-between items-center ma-container">
+      <div class="flex items-center">
+        <img src="assets/movie-app-logo.svg" class="mr-3 h-6 sm:h-9" alt="" />
+
+        <span
+          class="self-center text-xl font-semibold whitespace-nowrap text-white"
+        >
+          Movie App
+        </span>
+      </div>
+
+      <ng-container *ngIf="pages?.length">
+        <div class="flex items-center lg:order-2">
+          <button
+            type="button"
+            class="inline-flex items-center p-2 ml-1 text-sm rounded-lg lg:hidden focus:outline-none focus:ring-2 text-gray-400 hover:bg-gray-700 focus:ring-gray-600"
+            aria-controls="mobile-menu"
+            [attr.aria-expanded]="isMobileMenuOpen"
+            data-collapse-toggle="mobile-menu"
+            (click)="mobileMenuSwitch()"
+          >
+            <span class="sr-only">Open main menu</span>
+
+            <fa-icon [icon]="faBars" size="lg"></fa-icon>
+          </button>
+        </div>
+
+        <div
+          id="mobile-menu"
+          class="hidden justify-between items-center w-full lg:flex lg:w-auto lg:order-1 lg:flex-1 lg:justify-end"
+          [ngClass]="{ hidden: !isMobileMenuOpen }"
+        >
+          <ul
+            class="flex flex-col mt-1 font-medium lg:flex-row lg:space-x-8 lg:mt-0"
+          >
+            <li *ngFor="let page of pages; let last = last">
+              <a
+                [routerLink]="page.link"
+                routerLinkActive="text-white"
+                [routerLinkActiveOptions]="{ exact: true }"
+                class="block py-2 pr-4 pl-3 lg:border-0 lg:hover:text-primary-700 lg:p-0 text-gray-400 lg:hover:text-white hover:bg-gray-700 hover:text-white lg:hover:bg-transparent"
+                [ngClass]="last ? 'pb-1' : 'border-b border-gray-700'"
+              >
+                {{ page.label }}
+              </a>
+            </li>
+          </ul>
+        </div>
+      </ng-container>
+    </div>
+  </nav>
+</header>

@@ -1,10 +1,11 @@
 import { Component } from '@angular/core';
+import { NavigationPage } from '@ma-shared';
 
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
-  styleUrls: ['./app.component.scss']
+  styleUrls: ['./app.component.scss'],
 })
 export class AppComponent {
-  title = 'movie-app';
+  public pages: NavigationPage[] = [];
 }
