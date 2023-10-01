@@ -21,4 +21,8 @@ export class HeaderComponent {
   public mobileMenuSwitch(): void {
     this.isMobileMenuOpen = !this.isMobileMenuOpen;
   }
+
+  public mobileMenuClose(): void {
+    this.isMobileMenuOpen = false;
+  }
 }

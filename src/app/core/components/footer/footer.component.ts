@@ -1,4 +1,4 @@
-import { NgFor } from '@angular/common';
+import { NgFor, NgIf } from '@angular/common';
 import { Component, Input } from '@angular/core';
 import { RouterModule } from '@angular/router';
 import { NavigationPage } from '@ma-shared';
@@ -7,7 +7,7 @@ import { NavigationPage } from '@ma-shared';
   selector: 'ma-footer',
   templateUrl: './footer.component.html',
   standalone: true,
-  imports: [NgFor, RouterModule],
+  imports: [NgIf, NgFor, RouterModule],
 })
 export class FooterComponent {
   @Input() public pages: NavigationPage[];

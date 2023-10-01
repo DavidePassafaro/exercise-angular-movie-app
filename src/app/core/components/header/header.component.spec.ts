@@ -19,4 +19,12 @@ describe('HeaderComponent', () => {
       expect(component['isMobileMenuOpen']).toBe(expectedValue);
     });
   });
+
+  describe('should test mobileMenuClose method', () => {
+    it('should set isMobileMenuOpen flag to false', () => {
+      component['isMobileMenuOpen'] = true;
+      component.mobileMenuClose();
+      expect(component['isMobileMenuOpen']).toBe(false);
+    });
+  });
 });
