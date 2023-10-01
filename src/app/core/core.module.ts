@@ -8,9 +8,10 @@ import { EffectsModule } from '@ngrx/effects';
 import { SpinnerReducer } from './store/spinner/spinner.reducer';
 import { SPINNER_KEY } from './store/spinner/spinner.selectors';
 import { StoreDevtoolsModule } from '@ngrx/store-devtools';
+import { TechnicalErrorComponent } from './pages/technical-error/technical-error.component';
 
 const COMPONENTS: any[] = [HeaderComponent, FooterComponent, SpinnerComponent];
-const PAGES: any[] = [Error404Component];
+const PAGES: any[] = [Error404Component, TechnicalErrorComponent];
 
 const MODULES = [...COMPONENTS, ...PAGES];
 

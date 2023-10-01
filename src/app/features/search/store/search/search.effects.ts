@@ -7,12 +7,14 @@ import { SearchService } from '../../services/search/search.service';
 import { SpinnerStore } from '@ma-core';
 import { SearchActions } from './search.actions';
 import { getCurrentSearchInfo } from './search.selectors';
+import { Router } from '@angular/router';
 
 @Injectable()
 export class SearchEffects {
   private readonly actions$ = inject(Actions);
   private readonly store = inject(Store);
   private readonly searchService = inject(SearchService);
+  private readonly router = inject(Router);
 
   public startResearch$: Observable<Action> = createEffect(() =>
     this.actions$.pipe(
@@ -63,5 +65,16 @@ export class SearchEffects {
       ),
       tap(() => this.store.dispatch(SpinnerStore.stop()))
     )
+  );
+
+  public researchFail$: Observable<Action> = createEffect(
+    () =>
+      this.actions$.pipe(
+        ofType(SearchActions.researchFail),
+        tap(() => {
+          this.router.navigateByUrl('technical-error');
+        })
+      ),
+    { dispatch: false }
   );
 }

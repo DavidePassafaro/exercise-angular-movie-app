@@ -1,6 +1,10 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes, TitleStrategy } from '@angular/router';
-import { AppTitleStrategy, Error404Component } from '@ma-core';
+import {
+  AppTitleStrategy,
+  Error404Component,
+  TechnicalErrorComponent,
+} from '@ma-core';
 
 const routes: Routes = [
   {
@@ -10,6 +14,11 @@ const routes: Routes = [
     title: 'Search a movie',
   },
   { path: 'error-404', component: Error404Component, title: '404' },
+  {
+    path: 'technical-error',
+    component: TechnicalErrorComponent,
+    title: 'Error',
+  },
   { path: '', redirectTo: '/search', pathMatch: 'full' },
   { path: '**', redirectTo: '/error-404', pathMatch: 'full' },
 ];
