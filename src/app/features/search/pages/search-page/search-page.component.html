@@ -4,17 +4,23 @@
     (search)="search($event)"
   ></ma-search-bar>
 
-  <ng-container *ngIf="searchResults | async as movies; else searchCta">
+  <ng-container *ngIf="searchResults | async as results; else searchCta">
     <ng-container
-      *ngIf="movies.length; then resultsList; else noResults"
+      *ngIf="results.length; then resultsList; else noResults"
     ></ng-container>
 
     <ng-template #resultsList>
-      <ul class="mt-5 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-3">
-        <li *ngFor="let movie of movies">
-          <ma-movie-card [movie]="movie"></ma-movie-card>
-        </li>
-      </ul>
+      <div *ngFor="let group of results; trackBy: resultsGroupTrackBy">
+        <h2 class="mt-5 max-w-lg text-3xl font-semibold text-gray-900">
+          {{ group.year }}
+        </h2>
+
+        <ul class="mt-2 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-3">
+          <li *ngFor="let movie of group.results; trackBy: moviesGroupTrackBy">
+            <ma-movie-card [movie]="movie"></ma-movie-card>
+          </li>
+        </ul>
+      </div>
 
       <ma-navigation
         *ngIf="currentPage | async as pageNumber"
@@ -37,10 +43,11 @@
 
   <ng-template #searchCta>
     <div class="flex-1 flex justify-center items-center">
-      <h1 class="text-2xl text-gray-900 md:text-5xl lg:text-6xl">
+      <h1 class="text-2xl animate-bounce text-gray-900 md:text-5xl lg:text-6xl">
         <fa-icon class="mr-4" [icon]="faArrowUp" size="lg"></fa-icon>
         Search a movie
         <fa-icon class="ml-4" [icon]="faArrowUp" size="lg"></fa-icon>
-      </h1></div
-  ></ng-template>
+      </h1>
+    </div>
+  </ng-template>
 </div>

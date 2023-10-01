@@ -1,5 +1,5 @@
 import { createActionGroup, emptyProps, props } from '@ngrx/store';
-import { Movie } from '../../models/movie.interface';
+import { ResultsGroup } from '../../models/results-group.interface';
 
 export const SearchActions = createActionGroup({
   source: 'Search',
@@ -7,7 +7,7 @@ export const SearchActions = createActionGroup({
     startResearch: props<{ title: string; movieType?: string }>(),
     changePage: props<{ pageIndex: number }>(),
     researchSuccess: props<{
-      results: Movie[];
+      results: ResultsGroup[];
       totalResults: number;
       currentPage: number;
     }>(),

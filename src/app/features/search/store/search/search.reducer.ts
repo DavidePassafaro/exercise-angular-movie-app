@@ -1,12 +1,12 @@
 import { Action, ActionReducer, createReducer, on } from '@ngrx/store';
 import { SearchActions } from './search.actions';
-import { Movie } from '../../models/movie.interface';
+import { ResultsGroup } from '../../models/results-group.interface';
 
 export interface SearchState {
   loading: boolean;
   searchTitle?: string;
   searchType?: string;
-  results?: Movie[];
+  results?: ResultsGroup[];
   currentPage?: number;
   totalResults?: number;
   error?: Error | string;

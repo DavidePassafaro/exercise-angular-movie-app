@@ -18,8 +18,9 @@ import { SearchStore } from '../../store/search';
 import { Observable, tap } from 'rxjs';
 import { CommonModule } from '@angular/common';
 import { MovieCardComponent } from '../../components/movie-card/movie-card.component';
-import { Movie } from '../../models/movie.interface';
 import { NavigationComponent } from '../../components/navigation/navigation.component';
+import { ResultsGroup } from '../../models/results-group.interface';
+import { Movie } from '../../models/movie.interface';
 
 const CATEGORIES: SearchCategory[] = [
   {
@@ -67,7 +68,7 @@ export class SearchPageComponent {
 
   public searchCategories: SearchCategory[] = CATEGORIES;
 
-  public searchResults: Observable<Movie[]> = this.store
+  public searchResults: Observable<ResultsGroup[]> = this.store
     .select(SearchStore.getSearchResults)
     .pipe(tap(() => window.scrollTo({ top: 0, behavior: 'smooth' })));
 
@@ -78,6 +79,9 @@ export class SearchPageComponent {
   public totalPages: Observable<number> = this.store.select(
     SearchStore.getSearchTotalPagesQuantity
   );
+
+  public resultsGroupTrackBy = (_, { year }: ResultsGroup) => year;
+  public moviesGroupTrackBy = (_, { imdbID }: Movie) => imdbID;
 
   public search({ title, type }: SearchParameters): void {
     this.store.dispatch(SearchStore.startResearch({ title, movieType: type }));
