@@ -30,8 +30,8 @@ export class SearchEffects {
       tap(() => this.store.dispatch(SpinnerStore.start())),
       switchMap(({ title, movieType }) =>
         this.searchService.searchMovie(title, movieType).pipe(
-          switchMap(({ Search, totalResults, error }) =>
-            this.handleResults(Search, +totalResults, error, title)
+          switchMap(({ Search, totalResults, Error }) =>
+            this.handleResults(Search, +totalResults, Error, title)
           ),
           map(({ results, totalResults }) =>
             SearchActions.researchSuccess({
@@ -57,8 +57,8 @@ export class SearchEffects {
           switchMap(({ searchTitle, searchType }) =>
             this.searchService.searchMovie(searchTitle, searchType, pageIndex)
           ),
-          switchMap(({ Search, totalResults, error }) =>
-            this.handleResults(Search, +totalResults, error)
+          switchMap(({ Search, totalResults, Error }) =>
+            this.handleResults(Search, +totalResults, Error)
           ),
           map(({ results, totalResults }) =>
             SearchActions.researchSuccess({

@@ -29,7 +29,7 @@ export class DetailEffects {
       switchMap(({ id }) =>
         this.detailService.getMovieDetail(id).pipe(
           map((result: MovieDetailResult) => {
-            if (result.error) throw new Error(result.error);
+            if (result.Error) throw new Error(result.Error);
 
             this.title.setTitle('Movie App - ' + result.Title);
 

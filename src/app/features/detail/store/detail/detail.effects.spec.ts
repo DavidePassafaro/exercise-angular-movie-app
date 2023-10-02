@@ -63,7 +63,7 @@ describe('DetailEffects', () => {
     });
 
     it('should dispatch DetailActions.detailLoadFail', (done) => {
-      const mockDetail = { error: 'test-error' } as MovieDetailResult;
+      const mockDetail = { Error: 'test-error' } as MovieDetailResult;
       const titleSpy: jest.SpyInstance = jest.spyOn(titleService, 'setTitle');
       jest.spyOn(service, 'getMovieDetail').mockReturnValueOnce(of(mockDetail));
 
@@ -75,7 +75,7 @@ describe('DetailEffects', () => {
         const actionType: string = DetailActions.detailLoadFail.type;
         expect(action).toEqual({
           type: actionType,
-          error: new Error(mockDetail.error),
+          error: new Error(mockDetail.Error),
         });
 
         done();
