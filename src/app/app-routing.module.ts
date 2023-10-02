@@ -33,7 +33,12 @@ const routes: Routes = [
 ];
 
 @NgModule({
-  imports: [RouterModule.forRoot(routes, { bindToComponentInputs: true })],
+  imports: [
+    RouterModule.forRoot(routes, {
+      scrollPositionRestoration: 'enabled',
+      bindToComponentInputs: true,
+    }),
+  ],
   providers: [{ provide: TitleStrategy, useClass: AppTitleStrategy }],
   exports: [RouterModule],
 })

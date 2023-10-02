@@ -13,7 +13,7 @@ const routes: Routes = [
   {
     path: '',
     component: SearchPageComponent,
-    canDeactivate: [() => inject(Store).dispatch(SearchStore.reset())],
+    canActivate: [() => inject(Store).dispatch(SearchStore.reset())],
   },
 ];
 

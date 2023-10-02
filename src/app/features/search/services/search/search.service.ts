@@ -1,6 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable, inject } from '@angular/core';
-import { BaseOmDbResponse, OMDB_API_KEY } from '@ma-shared';
+import { BaseOmDbResponse, OMDB_API_BASE_PATH, OMDB_API_KEY } from '@ma-shared';
 import { Observable } from 'rxjs';
 import { Movie } from '../../models/movie.interface';
 
@@ -18,7 +18,7 @@ export class SearchService {
     type?: string,
     pageIndex?: number
   ): Observable<SearchResult> {
-    let url: string = `http://www.omdbapi.com/?apikey=${OMDB_API_KEY}&s=${title}`;
+    let url: string = `${OMDB_API_BASE_PATH}?apikey=${OMDB_API_KEY}&s=${title}`;
     if (type) url += `&type=${type}`;
     if (pageIndex) url += `&page=${pageIndex}`;
     return this.http.get<SearchResult>(url);

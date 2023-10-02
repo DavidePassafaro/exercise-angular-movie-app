@@ -69,5 +69,6 @@ export class SearchBarComponent implements OnInit {
 
   public formSubmit(): void {
     this.search.emit(this.formGroup.getRawValue());
+    (document.activeElement as HTMLInputElement).blur();
   }
 }
