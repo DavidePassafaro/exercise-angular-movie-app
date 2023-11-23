@@ -103,7 +103,13 @@ export class SearchEffects {
     results: ResultsGroup[];
     totalResults: number;
   }> {
-    if (error && error !== NO_MOVIES_FOUND_CODE) throw new Error(error);
+    if (error) {
+      if (error !== NO_MOVIES_FOUND_CODE) throw new Error(error);
+      else {
+        this.title.setTitle('Movie App - No movies found for ' + title);
+        return of({ results: [], totalResults: 0 });
+      }
+    }
 
     if (title) this.title.setTitle('Movie App - Search results for ' + title);
 
